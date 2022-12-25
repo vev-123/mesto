@@ -1,0 +1,18 @@
+.popup__edit-form {
+  width: 430px;
+  height: 330px;
+  flex-direction: column;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.15);
+  color: black;
+  display: flex;
+  position: absolute;
+}
+
+@media screen and (max-width: 595px) {
+  .popup__edit-form {
+    width: 282px;
+    height: 322px;
+  }   
+}
