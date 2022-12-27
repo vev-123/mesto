@@ -1,7 +1,13 @@
 .page {
-  max-width: 880px;
-  margin: 0 auto;
-  font-family: 'Inter', 'Arial', sans-serif;
-  color: white;
+  max-width: 1280px;
+  padding: 0 25px;
   background-color: black;
+  margin: 0 auto;
+  /*border: 1px red solid;*/
+}
+
+@media screen and (max-width: 400px) {
+  .page {
+    padding: 0;
+  }   
 }

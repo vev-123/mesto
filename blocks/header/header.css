@@ -1,9 +1,4 @@
 .header {
-  margin-top: 45px;
+  border-bottom: 1px solid rgba(84, 84, 84, 0.7);
+  max-width: 880px;
 }
-
-@media screen and (max-width: 400px) {
-    .header {
-      margin-top: 28px;
-    }   
-  }

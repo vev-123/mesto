@@ -1,11 +1,11 @@
-.profile__edit-button{
+.profile__edit-button {
   width: 24px;
   height: 24px;
   border: 1px solid #FFFFFF;
   background: url(../../../images/pen.svg) no-repeat center;
   padding: 0;
   align-self: end;
-  margin-bottom: 9px;
+  margin-bottom: 11px;
   transition: 0.2s;
 }
 
@@ -18,7 +18,7 @@
   .profile__edit-button {
     width: 18px;
     height: 18px;
-    background: url(../../../images/pen-small.svg) no-repeat center;
+    background-size: 7.5px;
     margin-bottom: 7px;
   }   
 }

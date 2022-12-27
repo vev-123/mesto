@@ -1,21 +1,19 @@
-.popup__title {
-  width: 358px;
-  margin: 48px auto 9px;
+.popup__input {
+  width: 100%;
+  margin: 22px auto 0;
   font-weight: 400;
   font-size: 14px;
-  line-height: 17px;
+  line-height: 34px;
   border: none;
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
   padding: 0;
+  border-bottom: 1px solid rgba(0, 0, 0, .2);
 }
 
 @media screen and (max-width: 595px) {
-  .popup__title {
-    font-size: 14px;
-    line-height: 17px;
-    width: 238px;
-    margin: 74px auto 9px;
+  .popup__input {
+    
   }   
 }
