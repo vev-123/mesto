@@ -1,5 +1,5 @@
 let profileEditButton = document.querySelector('.profile__edit-button');
-let popUp = document.querySelector('.popup');
+let popup = document.querySelector('.popup');
 let popupCloseButton = document.querySelector('.popup__close-button')
 
 let popupForm = document.querySelector('.popup__form')
@@ -12,11 +12,11 @@ let profileProfession = document.querySelector('.profile__subtitle');
 function openPopup () {
   userNameInput.value = profileName.textContent;
   userProfessionInput.value = profileProfession.textContent;
-  popUp.classList.add('popup_opened');
+  popup.classList.add('popup_opened');
 }
 
 function closePopup () {
-  popUp.classList.remove('popup_opened');
+  popup.classList.remove('popup_opened');
 }
 
 function handleFormSubmit (evt) {
