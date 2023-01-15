@@ -31,62 +31,27 @@
       </section>
 
       <section aria-label="Места" class="elements">
-        <article class="element">
-          <img class="element__image" src="./images/kirill-pershin-1088404-unsplash.jpg" alt="фото">
-          <div class="element__description">
-            <h2 class="element__title">Карачаевск</h2>
-            <button class="element__like-button" type="button" aria-label="лайк"></button>
-          </div>
-        </article>
-
-        <article class="element">
-          <img class="element__image" src="./images/kirill-pershin-1088404-unsplash.jpg" alt="фото">
-          <div class="element__description">
-            <h2 class="element__title">Карачаевск</h2>
-            <button class="element__like-button" type="button" aria-label="лайк"></button>
-          </div>
-        </article>
-
-        <article class="element">
-          <img class="element__image" src="./images/kirill-pershin-1088404-unsplash.jpg" alt="фото">
-          <div class="element__description">
-            <h2 class="element__title">Карачаевск</h2>
-            <button class="element__like-button" type="button" aria-label="лайк"></button>
-          </div>
-        </article>
-
-        <article class="element">
-          <img class="element__image" src="./images/kirill-pershin-1088404-unsplash.jpg" alt="фото">
-          <div class="element__description">
-            <h2 class="element__title">Карачаевск</h2>
-            <button class="element__like-button" type="button" aria-label="лайк"></button>
-          </div>
-        </article>
-
-        <article class="element">
-          <img class="element__image" src="./images/kirill-pershin-1088404-unsplash.jpg" alt="фото">
-          <div class="element__description">
-            <h2 class="element__title">Карачаевск</h2>
-            <button class="element__like-button" type="button" aria-label="лайк"></button>
-          </div>
-        </article>
-
-        <article class="element">
-          <img class="element__image" src="./images/kirill-pershin-1088404-unsplash.jpg" alt="фото">
-          <div class="element__description">
-            <h2 class="element__title">Карачаевск</h2>
-            <button class="element__like-button" type="button" aria-label="лайк"></button>
-          </div>
-        </article>
+        <!-- карточки -->
       </section>
     
     </main>
 
     <footer class="footer">
-      <p class="footer__copyright">&copy; 2022 Mesto Russia</p>
+      <p class="footer__copyright">&copy; 2023 Mesto Russia</p>
     </footer>
   
-    <div class="popup">
+    <template class="template">
+      <article class="element">
+        <button class="element__delete-button" type="button" aria-label="удалить"></button>
+        <img class="element__image" src="#" alt="#">
+        <div class="element__description">
+          <h2 class="element__title"></h2>
+          <button class="element__like-button" type="button" aria-label="лайк"></button>
+        </div>
+      </article>
+    </template>
+
+    <div class="popup popup_edit-profile">
       <div class="popup__container">
         <button class="popup__close-button" type="button" aria-label="закрыть"></button>
         <h2 class="popup__title">Редактировать профиль</h2>
@@ -97,6 +62,26 @@
         </form>
       </div>
     </div>
+
+    <div class="popup popup_add-card">
+      <div class="popup__container">
+        <button class="popup__close-button" type="button" aria-label="закрыть"></button>
+        <h2 class="popup__title">Новое место</h2>
+        <form class="popup__form" name="edit-form">
+          <input class="popup__input popup__input_data_place" name="popup-name" required type="text" placeholder="Название">
+          <input class="popup__input popup__input_data_link" name="popup-profession" required type="url" placeholder="Ссылка на картинку">
+          <button class="popup__save-button" type="submit">Создать</button>
+        </form>
+      </div>
+    </div>
+
+    <div class="popup popup_fullscreen-card">
+      <figure class="popup__figure">
+          <button class="popup__close-button" type="button" aria-label="закрыть"></button>
+          <img class="popup__picture" src="#" alt="#">
+          <figcaption class="popup__figcaption"></figcaption>
+      </figure>
+  </div>
   
   </div>
   
