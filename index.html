@@ -55,21 +55,59 @@
       <div class="popup__container">
         <button class="popup__close-button" type="button" aria-label="закрыть"></button>
         <h2 class="popup__title">Редактировать профиль</h2>
-        <form class="popup__form" name="edit-form">
-          <input class="popup__input popup__input_data_name" name="popup-name" required type="text" placeholder="Имя">
-          <input class="popup__input popup__input_data_profession" name="popup-profession" required type="text" placeholder="Род деятельности">
+        <form class="popup__form" name="edit-form" novalidate>
+          <input
+            required
+            id="input-name"
+            class="popup__input popup__input_data_name"
+            name="popup-name"
+            type="text"
+            placeholder="Имя"
+            minlength="2"
+            maxlength="40"
+          >
+          <span id="input-name-error" class="popup__text-error"></span>
+          <input
+            required
+            id="input-profession"
+            class="popup__input popup__input_data_profession"
+            name="popup-profession"
+            type="text"
+            placeholder="Род деятельности"
+            minlength="2"
+            maxlength="200"
+          >
+          <span id="input-profession-error" class="popup__text-error"></span>
           <button class="popup__save-button" type="submit">Сохранить</button>
         </form>
       </div>
     </div>
 
-    <div class="popup popup_add-card">
+   <div class="popup popup_add-card">
       <div class="popup__container">
         <button class="popup__close-button" type="button" aria-label="закрыть"></button>
         <h2 class="popup__title">Новое место</h2>
-        <form class="popup__form" name="edit-form">
-          <input class="popup__input popup__input_data_place" name="popup-name" required type="text" placeholder="Название">
-          <input class="popup__input popup__input_data_link" name="popup-profession" required type="url" placeholder="Ссылка на картинку">
+        <form class="popup__form" name="edit-form" novalidate>
+          <input
+            required
+            id="input-name-place"
+            class="popup__input popup__input_data_place"
+            name="popup-name"
+            type="text"
+            placeholder="Название"
+            minlength="2"
+            maxlength="30"
+          >
+          <span id="input-name-place-error" class="popup__text-error"></span>
+          <input
+            required
+            id="input-link"
+            class="popup__input popup__input_data_link"
+            name="popup-profession"
+            type="url"
+            placeholder="Ссылка на картинку"
+          >
+          <span id="input-link-error" class="popup__text-error"></span>
           <button class="popup__save-button" type="submit">Создать</button>
         </form>
       </div>
@@ -85,7 +123,10 @@
   
   </div>
   
+  <script src="./scripts/constants.js"></script>
+  <script src="./scripts/array.js"></script>
   <script src="./scripts/index.js"></script>
+  <script src="./scripts/validate.js"></script>
   
 </body>
 </html>

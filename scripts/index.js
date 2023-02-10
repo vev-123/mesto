@@ -1,73 +1,18 @@
-// выбираем имя и профессию а профиле
-const profileName = document.querySelector('.profile__title');
-const profileProfession = document.querySelector('.profile__subtitle');
-
-// выбираем кнопки в profile
-const profileEditButton = document.querySelector('.profile__edit-button');
-const profileAddButton = document.querySelector('.profile__add-button');
-
-//выбираем попапы
-const popupEditProfile = document.querySelector('.popup_edit-profile');
-const popupAddCard = document.querySelector('.popup_add-card');
-const popupFullScreen = document.querySelector('.popup_fullscreen-card');
-
-// выбираем кнопку закрытия в попапах
-const popupCloseButton = document.querySelectorAll('.popup__close-button')
-
-// выбираем elements и template для добавления карточек
-const templateCard = document.querySelector('.template').content;
-const elementsContainer = document.querySelector('.elements');
-
-// выбираем инпуты в попапе редактирования профиля
-const userNameInput = document.querySelector('.popup__input_data_name');
-const userProfessionInput = document.querySelector('.popup__input_data_profession');
-
-// выбираем инпуты в попапе добавления карточек
-const placeNameInput = document.querySelector('.popup__input_data_place');
-const placeLinkInput = document.querySelector('.popup__input_data_link');
-
-// массив карточек
-const initialCards = [
-  {
-    name: 'Архыз',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-  },
-  {
-    name: 'Челябинская область',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-  },
-  {
-    name: 'Иваново',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-  },
-  {
-    name: 'Камчатка',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-  },
-  {
-    name: 'Холмогорский район',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-  },
-  {
-    name: 'Байкал',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-  }
-];
-
 // общая функция добавления класса для открытия попапа
 function openPopup (popup) {
   popup.classList.add('popup_opened');
+  document.addEventListener('keydown', closePopupByEscape);
 }
 
 //вставляем в инпуты имя и профессию из профиля
-function readInformation() {
+function insertUserInfoInputs () {
   userNameInput.value = profileName.textContent;
   userProfessionInput.value = profileProfession.textContent;
 }
 
 // открытие попапа редактирования профиля (одновременно вставляет в инпуты имя и профессию из профиля)
 function openPopupEditProfile () {
-  readInformation();
+  insertUserInfoInputs();
   openPopup(popupEditProfile);
 }
 
@@ -79,16 +24,25 @@ function openPopupAddCard () {
 // общая функция закрытия попапов
 function closePopup (popup) {
   popup.classList.remove('popup_opened');
+  document.removeEventListener('keydown', closePopupByEscape);
 }
 
 // закрытие попапа профиля
-function closePopupEditProfile() {
+function closePopupEditProfile () {
   closePopup(popupEditProfile);
 }
 
 // закрытие попапа добавления карточки
 function closePopupAddCard() {
   closePopup(popupAddCard);
+}
+
+// закрытие всех попапов по Esc
+function closePopupByEscape (event) {
+  if (event.keyCode === 27) {
+    const popupOpened = document.querySelector('.popup_opened');
+    closePopup(popupOpened);
+  }
 }
 
 // внесение данных в профиль и сохранение их
@@ -111,6 +65,7 @@ function render() {
     addCardToContainer(elementsContainer, startCard);
   });
 }
+
 // вызываем карточкм
 render();
 
@@ -145,7 +100,7 @@ function handleFullScreen(cardData) {
 }
 
 // слушатели карточек
-function addListeners(element, cardData) {
+function addCardListeners(element, cardData) {
   element.querySelector('.element__like-button').addEventListener('click', (evt) => {
     handleLike(evt);
   });
@@ -163,13 +118,9 @@ function createCard(card) {
   newCard.querySelector('.element__title').textContent = card.name;
   newCard.querySelector('.element__image').src = card.link;
   newCard.querySelector('.element__image').alt = card.name;
-  addListeners(newCard, card);
+  addCardListeners(newCard, card);
   return newCard;
 }
-
-// открытие попапов по клику
-profileEditButton.addEventListener('click', openPopupEditProfile);
-profileAddButton.addEventListener('click', openPopupAddCard);
 
 // закрытие всех попапов по клику на крестик
 popupCloseButton.forEach((button) => {
@@ -177,6 +128,18 @@ popupCloseButton.forEach((button) => {
   button.addEventListener('click', () => closePopup(popup));
 });
 
+// закрытие всех попапов по клику на оверлей
+popupElement.forEach((popup) => {
+  popup.addEventListener('mousedown', (event) => {
+    if (event.target === event.currentTarget) {
+      closePopup(popup);
+    }
+  })
+});
+
+// открытие попапов по клику
+profileEditButton.addEventListener('click', openPopupEditProfile);
+profileAddButton.addEventListener('click', openPopupAddCard);
 // сохранить профиль по клику
 popupEditProfile.addEventListener('submit', handleFormSubmit);
 // сохранить карточку по клику
