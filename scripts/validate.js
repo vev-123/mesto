@@ -26,7 +26,8 @@ function enableFormValidation(form, config) {
   form.addEventListener('input', () => {
     toggleButton(form, config);
   });
-
+  
+  deactivateButton(form, config);
   addInputListeners(form, config);
   toggleButton(form, config);
 }
@@ -52,7 +53,16 @@ function toggleButton (form, config) {
   const isFormValid = form.checkValidity();
 
   buttonSubmit.disabled = !isFormValid;
-  buttonSubmit.classList.toggle('popup__save-button_disabled', !isFormValid);
+  buttonSubmit.classList.toggle(config.buttonDisabledClass, !isFormValid);
+}
+
+// Деактивация кнопки через reset
+function deactivateButton(form, config) {
+  form.addEventListener('reset', () => {
+    setTimeout(() => {
+      toggleButton(form, config);
+    }, 0);
+  });
 }
 
 // Нахождение и перебор всех инпутов. Взяли из инпутов элемент и повесили на него слушатель в котором запускается handleFormInput 

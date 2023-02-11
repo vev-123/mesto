@@ -19,6 +19,7 @@ function openPopupEditProfile () {
 // открытие попапа добавления карточки
 function openPopupAddCard () {
   openPopup(popupAddCard);
+  formAddCard.reset(); //очистка инпутов при каждом открытии
 }
 
 // общая функция закрытия попапов
@@ -39,14 +40,14 @@ function closePopupAddCard() {
 
 // закрытие всех попапов по Esc
 function closePopupByEscape (event) {
-  if (event.keyCode === 27) {
+  if (event.key === 'Escape') {
     const popupOpened = document.querySelector('.popup_opened');
     closePopup(popupOpened);
   }
 }
 
 // внесение данных в профиль и сохранение их
-function handleFormSubmit (evt) {
+function submitEditProfileForm (evt) {
   evt.preventDefault();
   profileName.textContent = userNameInput.value;
   profileProfession.textContent = userProfessionInput.value;
@@ -59,7 +60,7 @@ function addCardToContainer(container, card) {
 }
 
 // подготовка карточек
-function render() {
+function renderInitialCards() {
   initialCards.forEach((card) => {
     const startCard = createCard(card);
     addCardToContainer(elementsContainer, startCard);
@@ -67,7 +68,7 @@ function render() {
 }
 
 // вызываем карточкм
-render();
+renderInitialCards();
 
 // добавление новых карточек
 function handleAddCard(evt) {
@@ -75,8 +76,7 @@ function handleAddCard(evt) {
   const newCard = createCard({name: placeNameInput.value, link: placeLinkInput.value, alt: placeNameInput.value});
   addCardToContainer(elementsContainer, newCard);
   closePopupAddCard();
-  placeNameInput.value = '';
-  placeLinkInput.value = '';
+  evt.target.reset(); //очистка инпутов после отправки
 }
 
 // лайки
@@ -91,8 +91,6 @@ function handleRemove(evt) {
 
 // переход в карточку на весь экран
 function handleFullScreen(cardData) {
-  const picture = popupFullScreen.querySelector('.popup__picture');
-  const pictureCaption = popupFullScreen.querySelector('.popup__figcaption');
   picture.src = cardData.link;
   picture.alt = cardData.name;
   pictureCaption.textContent = picture.alt;
@@ -115,21 +113,27 @@ function addCardListeners(element, cardData) {
 // каждая карточка проходит через шаблон
 function createCard(card) {
   const newCard = templateCard.querySelector('.element').cloneNode(true);
-  newCard.querySelector('.element__title').textContent = card.name;
-  newCard.querySelector('.element__image').src = card.link;
-  newCard.querySelector('.element__image').alt = card.name;
+  const text = newCard.querySelector('.element__title');
+  const image = newCard.querySelector('.element__image');
+  const altImage = newCard.querySelector('.element__image');
+ 
+  text.textContent = card.name;
+  image.src = card.link;
+  altImage.alt = card.name;
+  
   addCardListeners(newCard, card);
+  
   return newCard;
 }
 
 // закрытие всех попапов по клику на крестик
-popupCloseButton.forEach((button) => {
+popupCloseButtons.forEach((button) => {
   const popup = button.closest('.popup');
   button.addEventListener('click', () => closePopup(popup));
 });
 
 // закрытие всех попапов по клику на оверлей
-popupElement.forEach((popup) => {
+popups.forEach((popup) => {
   popup.addEventListener('mousedown', (event) => {
     if (event.target === event.currentTarget) {
       closePopup(popup);
@@ -141,6 +145,6 @@ popupElement.forEach((popup) => {
 profileEditButton.addEventListener('click', openPopupEditProfile);
 profileAddButton.addEventListener('click', openPopupAddCard);
 // сохранить профиль по клику
-popupEditProfile.addEventListener('submit', handleFormSubmit);
+popupEditProfile.addEventListener('submit', submitEditProfileForm);
 // сохранить карточку по клику
 popupAddCard.addEventListener('submit', handleAddCard);
