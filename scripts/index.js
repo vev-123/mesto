@@ -1,3 +1,52 @@
+import {profileName, profileProfession, profileEditButton, profileAddButton, popups, popupEditProfile, popupAddCard, popupFullScreen, popupCloseButtons, elementsContainer, userNameInput, userProfessionInput, placeNameInput, placeLinkInput, picture, pictureCaption, formProfile, formAddCard, initialCards, formValidationConfig} from './constants.js';
+import {Card} from './Card.js';
+import {FormValidator} from './FormValidator.js';
+
+// валидация формы профайла
+const profileFormValidator = new FormValidator(formValidationConfig, formProfile);
+profileFormValidator.enableValidation();
+
+// валидация формы добавления карточек
+const addCardFormValidator = new FormValidator(formValidationConfig, formAddCard);
+addCardFormValidator.enableValidation();
+
+
+// создание карточки через класс Card
+function createCard(cardDetails) {
+  const card = new Card(cardDetails, '.template', handleFullScreen);
+  const cardElement = card.renderCard();
+  return cardElement;
+}
+
+// карточки передаются в контейнер
+function addCardToContainer(container, card) {
+  container.prepend(card);
+}
+
+// подготовка карточек
+initialCards.forEach((card) => {
+  const startCard = createCard(card);
+  addCardToContainer(elementsContainer, startCard);
+});
+
+// добавление новых карточек
+function handleAddCard(evt) {
+  evt.preventDefault();
+  const newCard = createCard({name: placeNameInput.value, link: placeLinkInput.value, alt: placeNameInput.value});
+  addCardToContainer(elementsContainer, newCard);
+  closePopupAddCard();
+  evt.target.reset(); // дублирует 67 строку, нужно ли
+}
+
+// переход в карточку на весь экран
+function handleFullScreen(link, name) {
+  picture.src = link;
+  picture.alt = name;
+  pictureCaption.textContent = picture.alt;
+  openPopup(popupFullScreen);
+}
+
+
 // общая функция добавления класса для открытия попапа
 function openPopup (popup) {
   popup.classList.add('popup_opened');
@@ -21,6 +70,7 @@ function openPopupAddCard () {
   openPopup(popupAddCard);
   formAddCard.reset(); //очистка инпутов при каждом открытии
 }
+
 
 // общая функция закрытия попапов
 function closePopup (popup) {
@@ -46,6 +96,7 @@ function closePopupByEscape (event) {
   }
 }
 
+
 // внесение данных в профиль и сохранение их
 function submitEditProfileForm (evt) {
   evt.preventDefault();
@@ -54,77 +105,6 @@ function submitEditProfileForm (evt) {
   closePopupEditProfile();
 }
 
-// карточки передаются в контейнер
-function addCardToContainer(container, card) {
-  container.prepend(card);
-}
-
-// подготовка карточек
-function renderInitialCards() {
-  initialCards.forEach((card) => {
-    const startCard = createCard(card);
-    addCardToContainer(elementsContainer, startCard);
-  });
-}
-
-// вызываем карточкм
-renderInitialCards();
-
-// добавление новых карточек
-function handleAddCard(evt) {
-  evt.preventDefault();
-  const newCard = createCard({name: placeNameInput.value, link: placeLinkInput.value, alt: placeNameInput.value});
-  addCardToContainer(elementsContainer, newCard);
-  closePopupAddCard();
-  evt.target.reset(); //очистка инпутов после отправки
-}
-
-// лайки
-function handleLike(evt) {
-  evt.target.classList.toggle('element__like-button_active');
-}
-
-// удаление карточек
-function handleRemove(evt) {
-  evt.target.closest('.element').remove();
-}
-
-// переход в карточку на весь экран
-function handleFullScreen(cardData) {
-  picture.src = cardData.link;
-  picture.alt = cardData.name;
-  pictureCaption.textContent = picture.alt;
-  openPopup(popupFullScreen);
-}
-
-// слушатели карточек
-function addCardListeners(element, cardData) {
-  element.querySelector('.element__like-button').addEventListener('click', (evt) => {
-    handleLike(evt);
-  });
-  element.querySelector('.element__delete-button').addEventListener('click', (evt) => {
-    handleRemove(evt);
-  });
-  element.querySelector('.element__image').addEventListener('click', () => {
-    handleFullScreen(cardData);
-  }); 
-}
-
-// каждая карточка проходит через шаблон
-function createCard(card) {
-  const newCard = templateCard.querySelector('.element').cloneNode(true);
-  const text = newCard.querySelector('.element__title');
-  const image = newCard.querySelector('.element__image');
-  const altImage = newCard.querySelector('.element__image');
- 
-  text.textContent = card.name;
-  image.src = card.link;
-  altImage.alt = card.name;
-  
-  addCardListeners(newCard, card);
-  
-  return newCard;
-}
 
 // закрытие всех попапов по клику на крестик
 popupCloseButtons.forEach((button) => {
@@ -140,6 +120,7 @@ popups.forEach((popup) => {
     }
   })
 });
+
 
 // открытие попапов по клику
 profileEditButton.addEventListener('click', openPopupEditProfile);

@@ -16,7 +16,6 @@ const popupFullScreen = document.querySelector('.popup_fullscreen-card');
 const popupCloseButtons = document.querySelectorAll('.popup__close-button')
 
 // выбираем elements и template для добавления карточек
-const templateCard = document.querySelector('.template').content;
 const elementsContainer = document.querySelector('.elements');
 
 // выбираем инпуты в попапе редактирования профиля
@@ -31,5 +30,64 @@ const placeLinkInput = document.querySelector('.popup__input_data_link');
 const picture = popupFullScreen.querySelector('.popup__picture');
 const pictureCaption = popupFullScreen.querySelector('.popup__figcaption');
 
-// выбор формы добавления карточек
+// выбор форм
+const formProfile = document.querySelector('#edit-form');
 const formAddCard = document.querySelector('#add-card-form');
+
+// массив карточек
+const initialCards = [
+  {
+    name: 'Архыз',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
+  },
+  {
+    name: 'Челябинская область',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
+  },
+  {
+    name: 'Иваново',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
+  },
+  {
+    name: 'Камчатка',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
+  },
+  {
+    name: 'Холмогорский район',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
+  },
+  {
+    name: 'Байкал',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
+  }
+];
+
+const formValidationConfig = {
+  inputSelector: '.popup__input',
+  errorClass: 'popup__input_type_error',
+  buttonSelector: '.popup__save-button',
+  buttonDisabledClass: 'popup__save-button_disabled',
+};
+
+export {
+  profileName, 
+  profileProfession,
+  profileEditButton,
+  profileAddButton,
+  popups,
+  popupEditProfile,
+  popupAddCard,
+  popupFullScreen,
+  popupCloseButtons,
+  elementsContainer,
+  userNameInput,
+  userProfessionInput,
+  placeNameInput,
+  placeLinkInput,
+  picture,
+  pictureCaption,
+  formProfile,
+  formAddCard,
+  initialCards,
+  formValidationConfig
+}
