@@ -5,6 +5,8 @@ class FormValidator {
     this._errorClass = formValidationConfig.errorClass;
     this._buttonSelector = formValidationConfig.buttonSelector;
     this._buttonDisabledClass = formValidationConfig.buttonDisabledClass;
+    this._buttonElement = this._formElement.querySelector(this._buttonSelector);
+    this._inputList = Array.from(this._formElement.querySelectorAll(this._inputSelector));
   }
   
   // Предотвращение отправки
@@ -12,28 +14,35 @@ class FormValidator {
     event.preventDefault();
   }
   
-  // Проверка валидности инпута и по результатам добавлять или удалять класс и текст ошибки
-  _handleFormInput (event) {
-    const input = event.target;
-    const inputId = input.id;
-    const errorElement = document.querySelector(`#${inputId}-error`);
-    
-    if (input.validity.valid) {
-      input.classList.remove(this._errorClass);
-      errorElement.textContent = '';
-    } else {
-      input.classList.add(this._errorClass);
-      errorElement.textContent = input.validationMessage;
-    }
+  // Очистить ошибку
+  _clearError(inputElement) {
+    const errorElement = this._formElement.querySelector(`#${inputElement.id}-error`);
+    inputElement.classList.remove(this._errorClass);
+    errorElement.textContent = '';
   }
   
+  // Показать ошибку
+  _showError(inputElement) {
+    const errorElement = this._formElement.querySelector(`#${inputElement.id}-error`);
+    inputElement.classList.add(this._errorClass);
+    errorElement.textContent = inputElement.validationMessage;
+  }
+
+  // Проверка валидности инпута и по результатам добавлять или удалять методы показа/очистки ошибки
+  _checkInputValidity (inputElement) {
+    if (inputElement.validity.valid) {
+      this._clearError(inputElement);
+    } else {
+      this._showError(inputElement);
+    }
+  }
+
   // Проверка кнопки. Кнопка активируется/деактивируется по результатам проверки валидности формы
   _toggleButton () {
-    const buttonSubmit = this._formElement.querySelector(this._buttonSelector);
     const isFormValid = this._formElement.checkValidity();
     
-    buttonSubmit.disabled = !isFormValid;
-    buttonSubmit.classList.toggle(this._buttonDisabledClass, !isFormValid);
+    this._buttonElement.disabled = !isFormValid;
+    this._buttonElement.classList.toggle(this._buttonDisabledClass, !isFormValid);
   }
   
   // Деактивация кнопки через reset
@@ -45,24 +54,18 @@ class FormValidator {
     });
   }
   
-  // Нахождение и перебор всех инпутов. Взяли из инпутов элемент и повесили на него слушатель в котором запускается handleFormInput 
+  // Взяли из инпутов элемент и повесили на него слушатель в котором запускается handleFormInput 
   _addInputListeners () {
-    const inputList = Array.from(this._formElement.querySelectorAll(this._inputSelector));
-    
-    inputList.forEach((item) => {
-      item.addEventListener('input', (event) => {
-        this._handleFormInput(event)
+    this._inputList.forEach((item) => {
+      item.addEventListener('input', () => {
+        this._checkInputValidity(item)
+        this._toggleButton();
       });
     });
   }
 
   // Валидация
   enableValidation() {
-    this._formElement.addEventListener('submit', this._disableSubmit);
-    this._formElement.addEventListener('input', () => {
-      this._toggleButton();
-    });
-    
     this._deactivateButton();
     this._addInputListeners();
     this._toggleButton();

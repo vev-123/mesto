@@ -8,6 +8,7 @@ class Card {
     this._likeButton = this._element.querySelector('.element__like-button');
     this._deleteButton = this._element.querySelector('.element__delete-button');
     this._image = this._element.querySelector('.element__image');
+    this._title = this._element.querySelector('.element__title');
     this._handleFullScreen = handleFullScreen;
   }
   
@@ -19,6 +20,7 @@ class Card {
   // удаление карточек
   _handleRemove() {
     this._element.remove();
+    this._element = null;
   }
   
   // слушатели карточек
@@ -31,7 +33,7 @@ class Card {
   // рендер карточек
   renderCard() {
     this._addCardListeners();
-    this._element.querySelector('.element__title').textContent = this._name;
+    this._title.textContent = this._name;
     this._image.src = this._link;
     this._image.alt = this._name;
     return this._element;

@@ -7,8 +7,8 @@ const profileFormValidator = new FormValidator(formValidationConfig, formProfile
 profileFormValidator.enableValidation();
 
 // валидация формы добавления карточек
-const addCardFormValidator = new FormValidator(formValidationConfig, formAddCard);
-addCardFormValidator.enableValidation();
+const cardFormValidator = new FormValidator(formValidationConfig, formAddCard);
+cardFormValidator.enableValidation();
 
 
 // создание карточки через класс Card
@@ -34,8 +34,7 @@ function handleAddCard(evt) {
   evt.preventDefault();
   const newCard = createCard({name: placeNameInput.value, link: placeLinkInput.value, alt: placeNameInput.value});
   addCardToContainer(elementsContainer, newCard);
-  closePopupAddCard();
-  evt.target.reset(); // дублирует 67 строку, нужно ли
+  closePopup(popupAddCard);
 }
 
 // переход в карточку на весь экран
@@ -78,16 +77,6 @@ function closePopup (popup) {
   document.removeEventListener('keydown', closePopupByEscape);
 }
 
-// закрытие попапа профиля
-function closePopupEditProfile () {
-  closePopup(popupEditProfile);
-}
-
-// закрытие попапа добавления карточки
-function closePopupAddCard() {
-  closePopup(popupAddCard);
-}
-
 // закрытие всех попапов по Esc
 function closePopupByEscape (event) {
   if (event.key === 'Escape') {
@@ -102,7 +91,7 @@ function submitEditProfileForm (evt) {
   evt.preventDefault();
   profileName.textContent = userNameInput.value;
   profileProfession.textContent = userProfessionInput.value;
-  closePopupEditProfile();
+  closePopup(popupEditProfile);
 }
 
 
