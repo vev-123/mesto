@@ -9,11 +9,6 @@ class FormValidator {
     this._inputList = Array.from(this._formElement.querySelectorAll(this._inputSelector));
   }
   
-  // Предотвращение отправки
-  _disableSubmit (event) {
-    event.preventDefault();
-  }
-  
   // Очистить ошибку
   _clearError(inputElement) {
     const errorElement = this._formElement.querySelector(`#${inputElement.id}-error`);
@@ -45,7 +40,7 @@ class FormValidator {
     this._buttonElement.classList.toggle(this._buttonDisabledClass, !isFormValid);
   }
   
-  // Деактивация кнопки через reset
+  //Деактивация кнопки через reset
   _deactivateButton() {
     this._formElement.addEventListener('reset', () => {
       setTimeout(() => {
@@ -54,7 +49,7 @@ class FormValidator {
     });
   }
   
-  // Взяли из инпутов элемент и повесили на него слушатель в котором запускается handleFormInput 
+  // Взяли из инпутов элемент и повесили на него слушатель в котором запускается _checkInputValidity и _toggleButton 
   _addInputListeners () {
     this._inputList.forEach((item) => {
       item.addEventListener('input', () => {
@@ -71,6 +66,14 @@ class FormValidator {
     this._toggleButton();
   }
 
+
+  resetError() {
+    this._inputList.forEach(inputElement => {
+      this._clearError(inputElement);
+    });
+    this._toggleButton();
+  }
+  
 }
 
 export {FormValidator};

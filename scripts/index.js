@@ -10,7 +10,6 @@ profileFormValidator.enableValidation();
 const cardFormValidator = new FormValidator(formValidationConfig, formAddCard);
 cardFormValidator.enableValidation();
 
-
 // создание карточки через класс Card
 function createCard(cardDetails) {
   const card = new Card(cardDetails, '.template', handleFullScreen);
@@ -50,6 +49,8 @@ function handleFullScreen(link, name) {
 function openPopup (popup) {
   popup.classList.add('popup_opened');
   document.addEventListener('keydown', closePopupByEscape);
+  profileFormValidator.resetError(); // очистка ошибок валидации при повторном открытии
+  cardFormValidator.resetError(); // очистка ошибок валидации при повторном открытии
 }
 
 //вставляем в инпуты имя и профессию из профиля

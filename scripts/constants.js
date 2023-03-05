@@ -89,5 +89,5 @@ export {
   formProfile,
   formAddCard,
   initialCards,
-  formValidationConfig
+  formValidationConfig,
 }
