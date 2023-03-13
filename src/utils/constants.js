@@ -34,6 +34,9 @@ const pictureCaption = popupFullScreen.querySelector('.popup__figcaption');
 const formProfile = document.querySelector('#edit-form');
 const formAddCard = document.querySelector('#add-card-form');
 
+const userName = '.profile__title';
+const userInfo = '.profile__subtitle';
+
 // массив карточек
 const initialCards = [
   {
@@ -90,4 +93,6 @@ export {
   formAddCard,
   initialCards,
   formValidationConfig,
+  userName,
+  userInfo
 }

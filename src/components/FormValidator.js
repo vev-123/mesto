@@ -61,13 +61,14 @@ class FormValidator {
 
   // Валидация
   enableValidation() {
+    //this._formElement.addEventListener('submit', (event) => {event.preventDefault()});
     this._deactivateButton();
     this._addInputListeners();
     this._toggleButton();
   }
 
-
-  resetError() {
+  // Сброс ошибки валидации
+  resetErrorValidation() {
     this._inputList.forEach(inputElement => {
       this._clearError(inputElement);
     });

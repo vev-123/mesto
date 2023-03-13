@@ -24,15 +24,15 @@ class Card {
   }
   
   // слушатели карточек
-  _addCardListeners() {
+  _setEventListeners() {
     this._likeButton.addEventListener('click', () => this._handleLike());
     this._deleteButton.addEventListener('click', () => this._handleRemove());
-    this._image.addEventListener('click', () => this._handleFullScreen(this._link, this._name));
+    this._image.addEventListener('click', () => this._handleFullScreen());
   }
   
   // рендер карточек
   renderCard() {
-    this._addCardListeners();
+    this._setEventListeners();
     this._title.textContent = this._name;
     this._image.src = this._link;
     this._image.alt = this._name;
