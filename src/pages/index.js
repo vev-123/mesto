@@ -1,4 +1,6 @@
-import {profileName, profileProfession, profileEditButton, profileAddButton, popups, popupEditProfile, popupAddCard, popupFullScreen, popupCloseButtons, elementsContainer, userNameInput, userProfessionInput, placeNameInput, placeLinkInput, picture, pictureCaption, formProfile, formAddCard, initialCards, formValidationConfig, userName, userInfo} from '../utils/constants.js';
+import {profileEditButton, profileAddButton, elementsContainer, userNameInput, 
+        userProfessionInput, formProfile, formAddCard, initialCards, 
+        formValidationConfig, userName, userInfo} from '../utils/constants.js';
 import {Card} from '../components/Card.js';
 import {FormValidator} from '../components/FormValidator.js';
 import {Section} from '../components/Section.js';

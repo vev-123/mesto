@@ -9,6 +9,7 @@ class PopupWithForm extends Popup {
     this._inputValues = {};
   }
 
+  // собирает данные всех полей формы
   _getInputValues() {
     this._inputList.forEach((input) => {
       this._inputValues[input.name] = input.value;
@@ -16,11 +17,13 @@ class PopupWithForm extends Popup {
     return this._inputValues;
   }
 
+  // закрытие и сброс формы
   close() {
     super.close();
     this._form.reset();
   }
 
+  // обработчик клика иконке закрытия и обработчик сабмита формы
   setEventListeners() {
     super.setEventListeners();
     this._popup.addEventListener('submit', (event) => {

@@ -5,10 +5,12 @@ class Section {
     this._container = containerSelector;
   }
 
+  // принимает DOM-элемент и добавляет его в контейнер
   addItem(element) {
     this._container.prepend(element);
   }
 
+  // отрисовка всех итемов
   renderItems() {
     this._items.forEach((item) => {
       this._renderer(item);
