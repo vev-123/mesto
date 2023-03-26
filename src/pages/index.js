@@ -55,8 +55,8 @@ const cardFormValidator = new FormValidator(formValidationConfig, formAddCard);
 cardFormValidator.enableValidation();
 
 // валидация формы авы
-//const avatarFormValidator = new FormValidator(formValidationConfig, formAvatar);
-//avatarFormValidator.enableValidation();
+const avatarFormValidator = new FormValidator(formValidationConfig, formAvatar);
+avatarFormValidator.enableValidation();
 
 // карточки
 const defaultCardList = new Section({
@@ -184,7 +184,7 @@ const profilePopup = new PopupWithForm('.popup_edit-profile',
       .then((res) => {
         user.setUserInfo({
           name: res.name,
-          position: res.about,
+          profession: res.about,
           id: res._id,
           avatar: res.avatar,
         });
@@ -211,7 +211,7 @@ const avatarPopup = new PopupWithForm('.popup_change-avatar',
       .then((res) => {
         user.setUserInfo({
           name: res.name,
-          position: res.about,
+          profession: res.about,
           id: res._id,
           avatar: res.avatar,
         });
@@ -256,5 +256,5 @@ profileAddButton.addEventListener('click', () => {
 // открытие попапа редактирования аватара по клику
 avatarEditButton.addEventListener("click", () => {
   avatarPopup.open();
-  //avatarFormValidator.resetErrorValidation();
+  avatarFormValidator.resetErrorValidation();
 });

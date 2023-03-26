@@ -8,7 +8,7 @@ const profileEditButton = document.querySelector('.profile__edit-button');
 const profileAddButton = document.querySelector('.profile__add-button');
 const cardDeleteButton = document.querySelector('#delete-card');
 const avatarEditButton = document.querySelector('.profile__hover');
-const buttonPopupSubmit = ".popup__submit";
+const buttonPopupSubmit = ".popup__save-button";
 
 // выбираем elements и template для добавления карточек
 const elementsContainer = document.querySelector('.elements');

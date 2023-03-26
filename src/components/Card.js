@@ -29,6 +29,7 @@ class Card {
     return cardElement;
   }
 
+  // проверка владельца карточки для добавления кнопки удаления
   _checkIdUser() {
     if (this._idOwner === this._userId) {
       this._deleteButton.classList.add('element__delete-button_visible');
@@ -58,6 +59,7 @@ class Card {
     return this._like.find((item) => item._id === this._userId);
   }
 
+  // переключение лайка
   toggleLike() {
     if (this.isLiked()) {
       this._setLikeBtn();

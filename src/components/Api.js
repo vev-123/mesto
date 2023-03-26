@@ -27,7 +27,7 @@ class Api {
       headers: this.headers,
       body: JSON.stringify({
         name: data.name,
-        about: data.position,
+        about: data.profession,
       }),
     }).then((res) => this._handleResponse(res));
   }
