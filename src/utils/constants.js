@@ -1,6 +1,14 @@
-// выбираем кнопки в profile
+// выбираем попапы
+const popupEditProfile = document.querySelector('.popup_edit-profile');
+const popupAddCard = document.querySelector('.popup_add-card');
+const popupProfileAvatar = document.querySelector('.popup_change-avatar');
+
+// выбираем кнопки
 const profileEditButton = document.querySelector('.profile__edit-button');
 const profileAddButton = document.querySelector('.profile__add-button');
+const cardDeleteButton = document.querySelector('#delete-card');
+const avatarEditButton = document.querySelector('.profile__hover');
+const buttonPopupSubmit = ".popup__submit";
 
 // выбираем elements и template для добавления карточек
 const elementsContainer = document.querySelector('.elements');
@@ -12,6 +20,9 @@ const userProfessionInput = document.querySelector('.popup__input_data_professio
 // выбор форм
 const formProfile = document.querySelector('#edit-form');
 const formAddCard = document.querySelector('#add-card-form');
+const formAvatar = document.querySelector('#avatar-form');
+
+
 
 // выбор имени и профессии профайла
 const userName = '.profile__title';
@@ -63,5 +74,12 @@ export {
   initialCards,
   formValidationConfig,
   userName,
-  userInfo
+  userInfo,
+  cardDeleteButton,
+  avatarEditButton,
+  popupEditProfile,
+  popupAddCard,
+  popupProfileAvatar,
+  buttonPopupSubmit,
+  formAvatar
 }

@@ -1,0 +1,27 @@
+.profile__hover {
+  background-image: url(../../../images/pen.svg);
+  background-repeat: no-repeat;
+  border-radius: 50%;
+  width: 120px;
+  height: 120px;
+  opacity: 0;
+  z-index: 1;
+  position: absolute;
+}
+
+.profile__hover:hover {
+  opacity: .8;
+  transition: opacity .3s;
+  cursor: pointer;
+  background-color: black;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 26px 26px;
+}
+
+@media screen and (max-width: 725px) {
+  .profile__hover {
+    margin: 0 0 26px;
+    align-self: center;
+  }   
+}
