@@ -1,8 +1,8 @@
 class UserInfo {
-  constructor({userName, userInfo}) {
+  constructor({userName, userInfo, userAvatar}) {
     this._user = document.querySelector(userName);
     this._userInfo = document.querySelector(userInfo);
-    this._avatar = document.querySelector(".profile__avatar");
+    this._avatar = document.querySelector(userAvatar);
   }
 
   // возвращает объект с данными пользователя когда данные пользователя нужно будет подставить в форму при открытии

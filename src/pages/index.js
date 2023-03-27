@@ -1,6 +1,6 @@
 import {profileEditButton, profileAddButton, elementsContainer, userNameInput, 
         userProfessionInput, formProfile, formAddCard, initialCards, 
-        formValidationConfig, userName, userInfo, cardDeleteButton, avatarEditButton,
+        formValidationConfig, userName, userInfo, userAvatar, cardDeleteButton, avatarEditButton,
         popupEditProfile, popupAddCard, popupProfileAvatar, buttonPopupSubmit,
         formAvatar} from '../utils/constants.js';
 
@@ -19,7 +19,7 @@ import './index.css';
 const imageFullScreen = new PopupWithImage('.popup_fullscreen-card');
 
 // данные пользователя
-const user = new UserInfo({userName, userInfo});
+const user = new UserInfo({userName, userInfo, userAvatar});
 
 // авторизация на сервере
 const api = new Api({
@@ -92,7 +92,6 @@ const getStartCard = () => {
       console.log(
         `Не удалось загрузить данные с сервера, ошибка: ${err.status}`
       );
-      defaultCardList.renderItems(initialCards);
     });
 };
 
@@ -123,7 +122,7 @@ function createCard(cardDetails) {
 
 // добавить новую карточку
 const addNewPost = (data) => {
-  btnLoading(popupAddCard, buttonPopupSubmit, true);
+  loadButton(popupAddCard, buttonPopupSubmit, true);
   api
     .addNewCard(data)
     .then((res) => {
@@ -141,7 +140,7 @@ const addNewPost = (data) => {
     .then(() => cardPopup.close())
     .catch((err) => console.log(`Не удалось добавить карточку: ${err.status}`))
     .finally(() => {
-      btnLoading(popupAddCard, buttonPopupSubmit, false);
+      loadButton(popupAddCard, buttonPopupSubmit, false);
     });
 };
 
@@ -167,7 +166,7 @@ const likeCard = (card) => {
 };
 
 // кнопка загрузки
-const btnLoading = (popupSelector, button, loading) => {
+const loadButton = (popupSelector, button, loading) => {
   const btnState = popupSelector.querySelector(button);
   if (loading) {
     return (btnState.textContent = "Сохранение...");
@@ -178,7 +177,7 @@ const btnLoading = (popupSelector, button, loading) => {
 // попап профайла
 const profilePopup = new PopupWithForm('.popup_edit-profile',
   function submitForm(data) {
-    btnLoading(popupEditProfile, buttonPopupSubmit, true);
+    loadButton(popupEditProfile, buttonPopupSubmit, true);
     api
       .patchUserData(data)
       .then((res) => {
@@ -192,7 +191,7 @@ const profilePopup = new PopupWithForm('.popup_edit-profile',
       .then(() => profilePopup.close())
       .catch((err) => `Не удалось удалить карточку: ${err.status}`)
       .finally(() => {
-        btnLoading(popupEditProfile, buttonPopupSubmit, false);
+        loadButton(popupEditProfile, buttonPopupSubmit, false);
       });
   }
 );
@@ -205,7 +204,7 @@ const cardPopup = new PopupWithForm('.popup_add-card', (data) => {
 // попап аватарки
 const avatarPopup = new PopupWithForm('.popup_change-avatar',
   function submitForm(data) {
-    btnLoading(popupProfileAvatar, buttonPopupSubmit, true);
+    loadButton(popupProfileAvatar, buttonPopupSubmit, true);
     api
       .changeAvatar(data)
       .then((res) => {
@@ -219,7 +218,7 @@ const avatarPopup = new PopupWithForm('.popup_change-avatar',
       .then(() => avatarPopup.close())
       .catch((err) => err.status)
       .finally(() => {
-        btnLoading(popupProfileAvatar, buttonPopupSubmit, false);
+        loadButton(popupProfileAvatar, buttonPopupSubmit, false);
       });
   }
 );
@@ -234,7 +233,7 @@ const popupWithConfirmation = new PopupWithConfirmation('.popup_delete-card',
       .then(() => popupWithConfirmation.close())
       .catch((err) => `Не удалось удалить карточку: ${err.status}`)
       .finally(() => {
-        cardDeleteButton.textContent = 'Карта удалена';
+        cardDeleteButton.textContent = 'Да';
       });
   }
 );

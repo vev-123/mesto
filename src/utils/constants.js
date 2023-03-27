@@ -24,9 +24,10 @@ const formAvatar = document.querySelector('#avatar-form');
 
 
 
-// выбор имени и профессии профайла
+// выбор имени, профессии, аватарки профайла
 const userName = '.profile__title';
 const userInfo = '.profile__subtitle';
+const userAvatar = '.profile__avatar';
 
 // массив карточек
 const initialCards = [
@@ -75,6 +76,7 @@ export {
   formValidationConfig,
   userName,
   userInfo,
+  userAvatar,
   cardDeleteButton,
   avatarEditButton,
   popupEditProfile,
